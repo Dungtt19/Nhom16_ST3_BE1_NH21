@@ -2,9 +2,13 @@
     require "config.php";
     require "models/db.php";
     require "models/product.php";
+	require "models/manufaceture.php";
+	$manu = new Manufaceture;
+	
+
     $sanpham = new Product;
     $laytatcasanpham = $sanpham->getAllProducts();
-    var_dump($laytatcasanpham);
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -179,12 +183,14 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
+						<?php 
+							$laytatcaManu = $manu->getAllManu();
+							foreach($laytatcaManu  as $value):
+						?>
+						<li><a href="products.php?manu_id=<?php echo $value['mahang'] ?>"><?php echo $value['tenhang'] ?> </a></li>
+						<?php
+							endforeach;
+						?>
 					</ul>
 					<!-- /NAV -->
 				</div>
